@@ -2,13 +2,13 @@ set -x
 
 export PATH=$HOME/.local/bin:$PATH
 BASE_PATH="/scratch/bj2414/WebAgent"
-
 if [ "$#" -lt 1 ]; then
     echo "Usage: run_web_sft.sh <nproc_per_node> [other_configs...]"
     exit 1
 fi
 
 nproc_per_node=$1
+
 export WANDB_API_KEY="108760f3e4154d69eada7e2253d6e696dbe34f5c"
 export WANDB_PROJECT="Web-sft"
 
@@ -26,7 +26,7 @@ torchrun --standalone --nnodes=1 --nproc_per_node=$nproc_per_node \
     model.partial_pretrain=Qwen/Qwen2.5-3B-Instruct \
     trainer.default_local_dir=$BASE_PATH/checkpoints/web_sft \
     trainer.project_name=web-sft \
-    trainer.experiment_name=web-sft-qwen-2.5-3b-instruct \
+    trainer.experiment_name=web-sft-qwen-2.5-3b-instruct_3 \
     trainer.total_epochs=2 \
     trainer.logger=['console','wandb'] \
     trainer.max_ckpt_to_keep=3 \
